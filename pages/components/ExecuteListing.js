@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { ethers } from "ethers";
-import { abi } from "./abi";
+import { abi } from "@/abi/abi";
 import { useMoralis } from "react-moralis";
 import { addressesByNetwork, SupportedChainId } from "@looksrare/sdk";
 import { Spinner } from "@chakra-ui/react";
