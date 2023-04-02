@@ -1,38 +1,34 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# NFT viewer @ Goerli testnet
 
-## Getting Started
+## Features: 
+1. Fetch data from <a href="https://looksrare.dev/reference/getcollectiontoken">LookRare’s API</a> to display the NFT's name, description, tokenId and image✅
+2. Button for the user to connect their MetaMask wallet ✅
+3. Ability to check whether the connected wallet owns the NFT with visual indication ✅
+(If you are the owner,  display of "YOU" will be shown below the Owner's label. If you are not the owner, display of "0x..." which indicates the actual owner address will be shown below the Owner's label)
 
-First, run the development server:
+<br/>
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+## Bonus Features: 
+1. Fetch data using React Query ✅
+(Can refer to Activity.js, Metadata.js and OwnerAskBid.js in the "components" folder)
+2. Populate the query collection address and tokenId using url params ✅
+(Parameters are added at the end of the URL as follows: `https://api.looksrare.org/api/v1/orders?isOrderAsk=true&collection=${contractAddress}&tokenId=${tokenID}&status%5B%5D=VALID`)
+3. Ability to navigate to other NFTs ( token id of 5589,1380 and 5457) within the same collection (Azuki)  ✅
+4. Fetch and display more information such as attributes, historical activity, floor price, market cap, total supply, unique owners, owner's address, and contract address ✅
+5. The React web app was built with Next.js and Chakra UI was used for components such as spinner ✅
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+<br/>
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## Stretch Goal Features: 
+1. Display LooksRare ask order with parameters such as the owner’s address, current price, and time left ✅
+2. Execute valid listing via the <a href="https://etherscan.io/address/0x59728544b08ab483533076417fbbb2fd0b17ce3a">V1 exchange contract</a> using ```matchAskWithTakerBid```. The contract function was called using Ethers.js ⭕ (50% complete)
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+<br/>
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## **Disclaimer**
+This project is still in development mode and future improvement is needed. It might take some time to load the webpages.
+Thank you.
+<br/>
+Live demo:<a href="https://nft-viewer-one.vercel.app/" target="_blank"> here</a>.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
