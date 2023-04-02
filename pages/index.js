@@ -1,6 +1,6 @@
 import Head from "next/head";
-import Metadata from "./components/Metadata";
-import Navbar from "./components/Navbar";
+import Metadata from "@/components/Metadata";
+import Navbar from "@/components/Navbar";
 
 export default function Home() {
   return (
