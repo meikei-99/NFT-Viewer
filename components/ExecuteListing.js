@@ -33,17 +33,14 @@ export default function ExecuteListing({
     //   "goerli",
     //   "https://eth-goerli.g.alchemy.com/v2/TXOYMv7SbV9AUHtP3meXzaPvWiKcBZfH"
     // );
-    const signer = new ethers.Wallet(
-      "0x8d32ca928941c824a00d5b825553a0d04810043a01434b9a8fdd08ca8938893d"
-    ).connect(provider);
+    const privateKey = process.env.NEXT_PUBLIC_WALLET_API;
+    const signer = new ethers.Wallet(privateKey).connect(provider);
     const signerAddress = await signer.getAddress();
     const looksRareContract = "0x59728544B08AB483533076417FbBB2fD0B17CE3a";
     const chainId = SupportedChainId.GOERLI;
     const addresses = addressesByNetwork[chainId];
     const contract = new ethers.Contract(looksRareContract, abi, signer);
     const paramsValue = "0x";
-
-    console.log(`SignerAddress=${account}`);
 
     const makerOrder = {
       isOrderAsk: isOrderAsk,
@@ -93,7 +90,11 @@ export default function ExecuteListing({
           showSuccessNotification ? "bg-[#0ce466]" : ""
         }`}
         onClick={() => {
-          handleMatchAskWithTakerBid();
+          if (account) {
+            handleMatchAskWithTakerBid();
+          } else {
+            alert("Please connect your wallet");
+          }
         }}
       >
         {showSuccessNotification ? (
