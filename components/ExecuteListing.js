@@ -40,7 +40,7 @@ export default function ExecuteListing({
     const chainId = SupportedChainId.GOERLI;
     const addresses = addressesByNetwork[chainId];
     const contract = new ethers.Contract(looksRareContract, abi, signer);
-    const paramsValue = [];
+    const paramsValue = "0x";
 
     const makerOrder = {
       isOrderAsk: isOrderAsk,
