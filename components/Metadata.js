@@ -81,7 +81,7 @@ export default function Metadata() {
   } = data?.data;
 
   const { countOwners, totalSupply, floorPrice, floorChange24h, marketCap } =
-    dataStats?.data;
+    dataStats?.data || {};
 
   return (
     <div className="w-full">
@@ -99,6 +99,7 @@ export default function Metadata() {
         totalSupply={totalSupply}
         address={address}
         contractAddress={contractAddress}
+        name={name}
       ></Banner>
       <div className="p-10 flex flex-col gap-14 xl:gap-0 xl:grid xl:grid-cols-4">
         <div className="col-span-1 flex flex-col sm:flex-row xl:flex-col gap-3 sm:gap-12 xl:gap-8">

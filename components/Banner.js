@@ -18,6 +18,7 @@ export default function Banner({
   totalSupply,
   address,
   contractAddress,
+  name,
 }) {
   const number = "text-lg lg:text-xl 2xl:text-2xl font-bold";
   const des = "text-xs lg:text-sm 2xl:text-base text-gray-500";

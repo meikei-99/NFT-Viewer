@@ -24,6 +24,8 @@ export default function ExecuteListing({
   const { account } = useMoralis();
   const [showEnteringNotification, setEnteringNotification] = useState(false);
   const [showSuccessNotification, setSuccessNotification] = useState(false);
+  const [showError, setShowError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   async function handleMatchAskWithTakerBid() {
     const provider = new ethers.providers.JsonRpcProvider(
@@ -71,25 +73,39 @@ export default function ExecuteListing({
       params: paramsValue,
     };
 
-    console.log("entering into the function");
-    setEnteringNotification(true);
-    const tx = await contract.matchAskWithTakerBid(takerOrder, makerOrder);
-    console.log("waiting for the function");
-    await tx.wait();
-    setEnteringNotification(false);
-    console.log("function done executing");
-    setSuccessNotification(true);
-    setTimeout(() => {
-      setSuccessNotification(false);
-    }, 5000);
+    try {
+      console.log("entering into the function");
+      setEnteringNotification(true);
+      const tx = await contract.matchAskWithTakerBid(takerOrder, makerOrder, {
+        gasLimit: 20000000,
+      });
+      console.log("waiting for the function");
+      await tx.wait();
+      setEnteringNotification(false);
+      console.log("function done executing");
+      setSuccessNotification(true);
+      setTimeout(() => {
+        setSuccessNotification(false);
+      }, 5000);
+    } catch (error) {
+      setShowError(true);
+      setTimeout(() => {
+        setShowError(false);
+        setEnteringNotification(false);
+      }, 5000);
+      setErrorMessage(error.error.code);
+      console.log(`Error:${error.error.code}`);
+    }
   }
 
   return (
     <div>
       <button
-        className={`p-1 w-full rounded-2xl flex place-content-center hover:bg-[#0ce466] cursor-pointer hover:text-black border border-[#0ce466] ${
-          showSuccessNotification ? "bg-[#0ce466]" : ""
-        }`}
+        className={`p-1 w-full rounded-2xl flex place-content-center cursor-pointer hover:text-black border ${
+          showError
+            ? "bg-red-600 border-black"
+            : " border-[#0ce466] hover:bg-[#0ce466]"
+        } ${showSuccessNotification ? "bg-[#0ce466]" : ""}`}
         onClick={() => {
           if (account) {
             handleMatchAskWithTakerBid();
@@ -98,7 +114,29 @@ export default function ExecuteListing({
           }
         }}
       >
-        {showSuccessNotification ? (
+        {showEnteringNotification ? (
+          showError ? (
+            <div className="flex flex-row gap-4 items-center">
+              <p className="font-bold text-black">{errorMessage}</p>
+            </div>
+          ) : showSuccessNotification ? (
+            <p className="font-bold text-black">LISTING EXECUTED</p>
+          ) : (
+            <div className="flex flex-row gap-4 items-center">
+              <p>Executing</p>
+              <Spinner
+                thickness="4px"
+                speed="0.65s"
+                emptyColor="gray.200"
+                color="green.400"
+                size="xs"
+              />
+            </div>
+          )
+        ) : (
+          "Buy Now"
+        )}
+        {/* {showSuccessNotification ? (
           <p className="font-bold text-black">LISTING EXECUTED</p>
         ) : showEnteringNotification ? (
           <div className="flex flex-row gap-4 items-center">
@@ -113,7 +151,7 @@ export default function ExecuteListing({
           </div>
         ) : (
           "Buy Now"
-        )}
+        )} */}
       </button>
     </div>
   );
