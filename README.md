@@ -7,8 +7,8 @@
 3. Ability to check whether the connected wallet owns the NFT with visual indication ✅
    (If you are the owner, display of "YOU" will be shown below the Owner's label. If you are not the owner, display of "0x..." which indicates the actual owner address will be shown below the Owner's label)
    
-   <img src="./owner_truthy.png" alt="Truthy indication" title="Optional title" width="600px" height="200px">
-   <img src="./owner_falsy.png" alt="Falsy indication" title="Optional title" width="600px" height="200px">
+   <img src="./public/owner_truthy.png" alt="Truthy indication" title="Optional title" width="450px" height="200px">
+   <img src="./public/owner_falsy.png" alt="Falsy indication" title="Optional title" width="450px" height="200px">
 
 <br/>
 
