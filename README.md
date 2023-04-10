@@ -27,7 +27,12 @@
 ## Stretch Goal Features:
 
 1. Display LooksRare ask order with parameters such as the owner’s address, current price, and time left ✅
-2. Execute valid listing via the <a href="https://etherscan.io/address/0x59728544b08ab483533076417fbbb2fd0b17ce3a">V1 exchange contract</a> using `matchAskWithTakerBid`. The contract function was called using Ethers.js ✅
+2. Execute valid listing via the <a href="https://etherscan.io/address/0x59728544b08ab483533076417fbbb2fd0b17ce3a">V1 exchange contract</a> using `matchAskWithTakerBid`. The contract function was called using Ethers.js ✅ (The `matchAskWithTakerBid` can only be executed when users connect their MetaMask account to the Ethereum mainnet. Once the "Buy Now" button was clicked, there will be a MetaMask pop up confirmation.)
+
+   <img src="./public/executeFunction.png" alt="execute function" title="Optional title" width="250px" height="400px">
+   <br/>
+   If users reject the transaction, there will be a visual indication as shown below. 
+    <img src="./public/tx_reject.png" alt="transaction failed" title="Optional title" width="450px" height="200px">
    <br/>
 
 ## **Disclaimer**
