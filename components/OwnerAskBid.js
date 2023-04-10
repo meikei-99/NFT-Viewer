@@ -62,7 +62,6 @@ export default function OwnerAskBid({ contractAddress, tokenID, tokenName }) {
   }
 
   const {
-    price,
     isOrderAsk,
     signer,
     strategy,
@@ -74,7 +73,8 @@ export default function OwnerAskBid({ contractAddress, tokenID, tokenName }) {
     v,
     r,
     s,
-  } = data.data?.[0];
+    price,
+  } = data.data?.[0] ?? {};
 
   return (
     <div className="flex flex-col gap-4 2xl:gap-8 justify-center">
@@ -109,16 +109,19 @@ export default function OwnerAskBid({ contractAddress, tokenID, tokenName }) {
           ) : (
             <div className="flex flex-col gap-2">
               <p className="text-gray-400">Owner</p>
-              <Link className={buttonDesign}>error</Link>
+              <span className={buttonDesign}>error</span>
             </div>
           )}
-          {price ? (
+          {price !== undefined ? (
             <div className="flex flex-col gap-2">
               <p className="text-gray-400">Current Price</p>
               <p className={buttonDesign}>{price / 1e18} ETH</p>
             </div>
           ) : (
-            ""
+            <div className="flex flex-col gap-2">
+              <p className="text-gray-400">Current Price</p>
+              <p className={buttonDesign}>error</p>
+            </div>
           )}
           {timeLeft ? (
             <div className="flex flex-col gap-2">
