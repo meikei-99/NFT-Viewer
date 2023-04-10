@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { ethers } from "ethers";
 import { abi } from "@/abi/abi";
-import { useMoralis } from "react-moralis";
-import { addressesByNetwork, SupportedChainId } from "@looksrare/sdk";
+import { useMoralis, useChain } from "react-moralis";
 import { Spinner } from "@chakra-ui/react";
 
 export default function ExecuteListing({
@@ -22,26 +21,16 @@ export default function ExecuteListing({
   s,
 }) {
   const { account } = useMoralis();
+  const { chainId } = useChain();
   const [showEnteringNotification, setEnteringNotification] = useState(false);
   const [showSuccessNotification, setSuccessNotification] = useState(false);
   const [showError, setShowError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
   async function handleMatchAskWithTakerBid() {
-    const provider = new ethers.providers.JsonRpcProvider(
-      "https://goerli.infura.io/v3/5dc74bc41b2d473aa5dc375eca061cc3"
-    );
-    // const provider = new ethers.providers.AlchemyProvider(
-    //   "goerli",
-    //   "https://eth-goerli.g.alchemy.com/v2/TXOYMv7SbV9AUHtP3meXzaPvWiKcBZfH"
-    // );
-    const privateKey =
-      "0x8d32ca928941c824a00d5b825553a0d04810043a01434b9a8fdd08ca8938893d";
-    const signer = new ethers.Wallet(privateKey).connect(provider);
-    const signerAddress = await signer.getAddress();
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
     const looksRareContract = "0x59728544B08AB483533076417FbBB2fD0B17CE3a";
-    const chainId = SupportedChainId.GOERLI;
-    const addresses = addressesByNetwork[chainId];
     const contract = new ethers.Contract(looksRareContract, abi, signer);
     const paramsValue = [];
 
@@ -93,8 +82,8 @@ export default function ExecuteListing({
         setShowError(false);
         setEnteringNotification(false);
       }, 5000);
-      setErrorMessage(error.error.code);
-      console.log(`Error:${error.error.code}`);
+      setErrorMessage(error.code);
+      console.log(`Error:${error.code}`);
     }
   }
 
@@ -107,10 +96,12 @@ export default function ExecuteListing({
             : " border-[#0ce466] hover:bg-[#0ce466]"
         } ${showSuccessNotification ? "bg-[#0ce466]" : ""}`}
         onClick={() => {
-          if (account) {
+          if (account && chainId == "0x1") {
             handleMatchAskWithTakerBid();
           } else {
-            alert("Please connect your wallet");
+            alert(
+              "Please connect your MetaMask wallet to the Ethereum mainnet"
+            );
           }
         }}
       >
@@ -119,8 +110,6 @@ export default function ExecuteListing({
             <div className="flex flex-row gap-4 items-center">
               <p className="font-bold text-black">{errorMessage}</p>
             </div>
-          ) : showSuccessNotification ? (
-            <p className="font-bold text-black">LISTING EXECUTED</p>
           ) : (
             <div className="flex flex-row gap-4 items-center">
               <p>Executing</p>
@@ -133,25 +122,15 @@ export default function ExecuteListing({
               />
             </div>
           )
-        ) : (
-          "Buy Now"
-        )}
-        {/* {showSuccessNotification ? (
+        ) : showSuccessNotification ? (
           <p className="font-bold text-black">LISTING EXECUTED</p>
-        ) : showEnteringNotification ? (
+        ) : showError ? (
           <div className="flex flex-row gap-4 items-center">
-            <p>Executing</p>
-            <Spinner
-              thickness="4px"
-              speed="0.65s"
-              emptyColor="gray.200"
-              color="green.400"
-              size="xs"
-            />
+            <p className="font-bold text-black">{errorMessage}</p>
           </div>
         ) : (
           "Buy Now"
-        )} */}
+        )}
       </button>
     </div>
   );

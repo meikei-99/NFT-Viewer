@@ -68,7 +68,7 @@ export default function Banner({
         <div className="flex flex-col gap-2 sm:gap-0 sm:flex-row justify-between items-center text-base lg:text-lg 2xl:text-2xl">
           <div className="w-full flex flex-row gap-8">
             <div>
-              <p className={number}>{countOwners / 1e3}K</p>
+              <p className={number}>{(countOwners / 1e3).toFixed(1)}K</p>
               <p className={des}>Owners</p>
             </div>
             <div>

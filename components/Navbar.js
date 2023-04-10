@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import ConnectButton from "./ConnectButton";
+import { useMoralis } from "react-moralis";
 
 export default function Navbar() {
   const [showNav, setShowNav] = useState(true);

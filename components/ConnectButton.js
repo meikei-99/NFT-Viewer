@@ -1,5 +1,5 @@
-import { useMoralis } from "react-moralis";
-import { useEffect } from "react";
+import { useMoralis, useChain } from "react-moralis";
+import { useEffect, useState } from "react";
 
 export default function ConnectButton() {
   const {
@@ -10,6 +10,7 @@ export default function ConnectButton() {
     deactivateWeb3,
     isWeb3EnableLoading,
   } = useMoralis();
+  const { chainId } = useChain();
 
   useEffect(() => {
     if (window.localStorage.getItem("connected")) {
@@ -29,9 +30,15 @@ export default function ConnectButton() {
   return (
     <div className="grid place-content-center text-xs lg:text-sm 2xl:text-base">
       {account ? (
-        <div className="border border-[#0ce466] px-6 rounded-lg">
-          {account.slice(0, 6)}...
-          {account.slice(account.length - 4)}
+        <div className="border border-[#0ce466] py-1 rounded-lg text-center">
+          {chainId == "0x1" ? (
+            <div className="px-6">
+              {account.slice(0, 6)}...
+              {account.slice(account.length - 4)}
+            </div>
+          ) : (
+            <div className="px-2">Please switch to Ethereum Mainnet</div>
+          )}
         </div>
       ) : (
         <button
