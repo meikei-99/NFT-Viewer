@@ -82,7 +82,7 @@ export default function OwnerAskBid({ contractAddress, tokenID, tokenName }) {
       <div className="text-sm 2xl:text-base flex flex-col gap-8 2xl:gap-10 justify-center">
         <div className="flex flex-col sm:flex-row gap-4 sm:gap-8 justify-around">
           {signer ? (
-            0xd803b0e6dc96a911f2314d3306e5f3779dbef951 == account ? (
+            signer == account ? (
               <div className="flex flex-col gap-2">
                 <p className="text-gray-400">Owner</p>
                 <Link
