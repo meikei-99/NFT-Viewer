@@ -32,7 +32,7 @@
    <img src="./public/executeFunction.png" alt="execute function" title="Optional title" width="250px" height="400px">
    <br/>
    If users reject the transaction, there will be a visual indication as shown below. 
-    <img src="./public/tx_reject.png" alt="transaction failed" title="Optional title" width="450px" height="200px">
+    <img src="./public/tx_rejected.png" alt="transaction failed" title="Optional title" width="450px" height="200px">
    <br/>
 
 ## **Disclaimer**
