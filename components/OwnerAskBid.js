@@ -10,7 +10,7 @@ export default function OwnerAskBid({ contractAddress, tokenID, tokenName }) {
   const [timeLeft, setTimeLeft] = useState("");
   const { account } = useMoralis();
   const buttonDesign =
-    "text-base 2xl:text-lg border border-[#0ce466] px-4 rounded-2xl";
+    "text-base 2xl:text-lg border border-[#0ce466] px-4 rounded-2xl text-center";
   const isLoadingOrError =
     "p-1 rounded-2xl flex place-content-center border border-[#0ce466]";
 

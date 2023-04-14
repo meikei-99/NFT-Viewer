@@ -26,7 +26,7 @@ export default function TokenDetails({ contractAddress, tokenID }) {
         <p className={detailTag}>Contract</p>
         <div className="flex flex-row items-center gap-3">
           <p className={detailDes}>
-            {contractAddress.slice(0, 2)}...
+            {contractAddress.slice(0, 6)}...
             {contractAddress.slice(contractAddress.length - 4)}
           </p>
           <button onClick={handleCopy} className="cursor-pointer">

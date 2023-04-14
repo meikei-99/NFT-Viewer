@@ -23,15 +23,21 @@ export default function Banner({
   const number = "text-lg lg:text-xl 2xl:text-2xl font-bold";
   const des = "text-xs lg:text-sm 2xl:text-base text-gray-500";
 
-  const handleCopy = async () => {
-    await navigator.clipboard.writeText(address);
+  const handleCopy = () => {
+    navigator.clipboard.writeText(address);
     alert("Contract address copied to clipboard!");
   };
+
   return (
-    <div
-      className="w-full h-72 bg-cover overflow-hidden relative"
-      style={{ backgroundImage: `url(${bannerURI})` }}
-    >
+    <div className="w-full h-72 bg-cover overflow-hidden relative">
+      <Image
+        src={bannerURI}
+        alt="Banner image"
+        width={800}
+        height={800}
+        className="absolute object-cover object-center w-full h-full"
+        priority
+      />
       <div className="absolute inset-0 bg-gradient-to-t from-[#121619]  via-[#121619]/[0.85] to-[#121619]/[0.8] z-10"></div>
       <div className="absolute w-full h-full px-6 xs:px-10 z-20 flex flex-col gap-4 justify-center align-middle">
         <div className="flex flex-row items-center gap-5 xs:gap-8">
@@ -54,7 +60,7 @@ export default function Banner({
               </p>
               <div className="text-xs lg:text-sm 2xl:text-base flex flex-row items-center gap-2 border border-white rounded-md px-3">
                 <p>
-                  {contractAddress.slice(0, 2)}...
+                  {contractAddress.slice(0, 6)}...
                   {contractAddress.slice(contractAddress.length - 4)}
                 </p>
                 <button onClick={handleCopy}>

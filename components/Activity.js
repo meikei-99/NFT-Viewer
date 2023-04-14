@@ -6,8 +6,8 @@ import Link from "next/link";
 
 export default function Activity({ contractAddress, tokenID }) {
   const [displayCount, setDisplayCount] = useState(3);
-  const fetchAskOrder = async ({ queryKey }) => {
-    const [_, { contractAddress }] = queryKey;
+
+  const fetchAskOrder = async () => {
     const response = await axios.get(
       `https://api.looksrare.org/api/v1/events?collection=${contractAddress}&tokenId=${tokenID}`,
       { headers: { accept: "application/json" } }
@@ -16,8 +16,10 @@ export default function Activity({ contractAddress, tokenID }) {
     return response.data;
   };
 
-  const queryKey = ["askOrder", { contractAddress }];
-  const { data, isLoading, error } = useQuery(queryKey, fetchAskOrder);
+  const { data, isLoading, error } = useQuery(
+    ["fetchActivity", contractAddress, tokenID],
+    fetchAskOrder
+  );
 
   if (isLoading) {
     return <p className="flex items-center py-3">Fetching activity ...</p>;

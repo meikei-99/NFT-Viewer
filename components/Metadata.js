@@ -33,7 +33,7 @@ export default function Metadata() {
   };
 
   const { data, isLoading, error } = useQuery(
-    ["metadata", { contractAddress, tokenID }],
+    ["metadata", contractAddress, tokenID],
     fetchMetadata
   );
 
@@ -78,7 +78,7 @@ export default function Metadata() {
     name: tokenName,
     imageURI,
     attributes,
-  } = data?.data;
+  } = data?.data || {};
 
   const { countOwners, totalSupply, floorPrice, floorChange24h, marketCap } =
     dataStats?.data || {};
@@ -108,9 +108,8 @@ export default function Metadata() {
             initial={{ x: -20, opacity: 0 }}
             whileInView={{ x: 0, opacity: 1 }}
             transition={{
-              delay: 0.2,
-              duration: 0.8,
-              ease: "easeInOut",
+              delay: 0,
+              duration: 0.7,
             }}
           >
             NAVIGATION
@@ -118,7 +117,6 @@ export default function Metadata() {
           <motion.div
             initial={"offscreen"}
             whileInView={"onscreen"}
-            viewport={{ once: false, amount: 0.3 }}
             transition={{ staggerChildren: 0.3 }}
             className="text-xl lg:text-2xl 2xl:text-3xl flex flex-row xl:flex-col gap-4 sm:gap-8 font-extralight"
           >
@@ -135,19 +133,19 @@ export default function Metadata() {
               className={popularList}
               variants={animateLeft}
               onClick={() => {
-                setTokenId("1380");
+                setTokenId("4666");
               }}
             >
-              Azuki #1380
+              Azuki #4666
             </motion.button>
             <motion.button
               className={popularList}
               variants={animateLeft}
               onClick={() => {
-                setTokenId("5457");
+                setTokenId("1334");
               }}
             >
-              Azuki #5457
+              Azuki #1334
             </motion.button>
           </motion.div>
         </div>
