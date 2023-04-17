@@ -15,7 +15,7 @@ export default function Metadata() {
     "hover:underline hover:underline-offset-10 ... w-fit hover:animate-[slideRight_0.6s_ease-in-out_forwards] cursor-pointer hover:text-[#0ce466]";
 
   const contractAddress = "0xED5AF388653567Af2F388E6224dC7C4b3241C544";
-  const [tokenID, setTokenId] = useState(9211);
+  const [tokenID, setTokenId] = useState(4666);
   const fetchMetadata = async () => {
     const response = await axios.get(
       `https://api.looksrare.org/api/v1/tokens?collection=${contractAddress}&tokenId=${tokenID}`,
@@ -124,15 +124,6 @@ export default function Metadata() {
               className={popularList}
               variants={animateLeft}
               onClick={() => {
-                setTokenId("9211");
-              }}
-            >
-              Azuki #9211
-            </motion.button>
-            <motion.button
-              className={popularList}
-              variants={animateLeft}
-              onClick={() => {
                 setTokenId("4666");
               }}
             >
@@ -142,10 +133,19 @@ export default function Metadata() {
               className={popularList}
               variants={animateLeft}
               onClick={() => {
-                setTokenId("1334");
+                setTokenId("3407");
               }}
             >
-              Azuki #1334
+              Azuki #3407
+            </motion.button>
+            <motion.button
+              className={popularList}
+              variants={animateLeft}
+              onClick={() => {
+                setTokenId("1102");
+              }}
+            >
+              Azuki #1102
             </motion.button>
           </motion.div>
         </div>
